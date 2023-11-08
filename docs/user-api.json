@@ -13,7 +13,19 @@
     "paths": {
         "/api/users/register": {
             "post": {
-                "description": "Register new user"
+                "description": "Register new user",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "username": {},
+                                }
+                            }
+                        }
+                    }
+                },
             }
         },
         "api/users/login": {
