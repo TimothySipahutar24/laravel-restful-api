@@ -1,8 +1,8 @@
 {
     "openapi": "3.0.3",
     "info": {
-        "title": "User API",
-        "description": "User API",
+        "title": "Contact API",
+        "description": "Contact API",
         "version": "1.0.0"
     },
     "servers": [
@@ -11,215 +11,42 @@
         }
     ],
     "paths": {
-        "/api/users/register": {
+        "/api/contacts": {
             "post": {
-                "description": "Register new user",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "examples": {
-                                "timothy": {
-                                    "description": "Register user timothy",
-                                    "value": {
-                                        "username": "tmtsipahutar",
-                                        "password": "rahasia",
-                                        "first_name": "Timothy",
-                                        "last_name": "Sipahutar"
-                                    }
-                                },
-                                "david": {
-                                    "description": "Register user david",
-                                    "value": {
-                                        "username": "dvdsipahutar",
-                                        "password": "rahasia",
-                                        "first_name": "David",
-                                        "last_name": "Sipahutar"
-                                    }
-                                }
-                            },
-                            "schema": {
-                                "type": "object",
-                                "required": [
-                                    "username", "password", "first_name", "last_name"
-                                ],
-                                "properties": {
-                                    "username": {
-                                        "type": "string"
-                                    },
-                                    "password": {
-                                        "type": "string"
-                                    },
-                                    "first_name": {
-                                        "type": "string"
-                                    },
-                                    "last_name": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "400": {
-                        "description": "Validation error",
-                        "content": {
-                            "application/json": {
-                                "examples": {
-                                    "validationerror": {
-                                        "description": "Validation error",
-                                        "value": {
-                                            "errors": {
-                                                "username": [
-                                                    "username must not be blank",
-                                                    "username min 6 characters"
-                                                ],
-                                                "first_name": [
-                                                    "first_name must not be blank"
-                                                ],
-                                                "last_name": [
-                                                    "last_name must not be blank"
-                                                ]
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "201": {
-                        "description": "Success register user",
-                        "content": {
-                            "application/json": {
-                                "examples": {
-                                    "success": {
-                                        "description": "Success register user",
-                                        "value": {
-                                            "data": {
-                                                "id": 1,
-                                                "username": "tmtsipahutar",
-                                                "first_name": "Timothy",
-                                                "last_name": "Sipahutar"
-                                            }
-                                        }
-                                    }
-                                },
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "id": {
-                                                    "type": "number"
-                                                },
-                                                "username": {
-                                                    "type": "string"
-                                                },
-                                                "first_name": {
-                                                    "type": "string"
-                                                },
-                                                "last_name": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        },
-                                        "errors": {
-                                            "type": "object"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/users/login": {
-            "post": {
-                "description": "Login user",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "username": {
-                                        "type": "string"
-                                    },
-                                    "password": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Success to login",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "id": {
-                                                    "type": "number"
-                                                },
-                                                "username": {
-                                                    "type": "string"
-                                                },
-                                                "first_name": {
-                                                    "type": "string"
-                                                },
-                                                "last_name": {
-                                                    "type": "string"
-                                                },
-                                                "token": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        },
-                                        "errors": {
-                                            "type": "object"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Failed to login",
-                        "content": {
-                            "application/json": {
-                                "examples": {
-                                    "badcredentials": {
-                                        "description": "Bad Request - Invalid Credentials",
-                                        "value": {
-                                            "error": "Invalid credentials. Please check your username and password."
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/users/current": {
-            "get": {
-                "description": "Get current user",
+                "description": "Create new contact",
                 "parameters": [
                     {
                         "name": "Authorization",
                         "in": "header"
                     }
                 ],
+                "requestBody": {
+                    "description": "Create new contact",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "first name": {
+                                        "type": "string"
+                                    },
+                                    "last name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
-                        "description": "Success get current user",
+                        "description": "Success create contact",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -231,13 +58,140 @@
                                                 "id": {
                                                     "type": "number"
                                                 },
-                                                "username": {
+                                                "first_name": {
                                                     "type": "string"
+                                                },
+                                                "last_name": {
+                                                    "type": "string"
+                                                },
+                                                "email": {
+                                                    "type": "string"
+                                                },
+                                                "phone": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "description": "Search contact",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "name": "email",
+                        "in": "query"
+                    },
+                    {
+                        "name": "phone",
+                        "in": "query"
+                    },
+                    {
+                        "name": "size",
+                        "in": "query"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success search contact",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "number"
+                                                    },
+                                                    "first_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "last_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "email": {
+                                                        "type": "string"
+                                                    },
+                                                    "phone": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "error": {
+                                            "type": "object"
+                                        },
+                                        "meta": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/contact/{id}": {
+            "get": {
+                "description": "Get contact",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success get contact",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "number"
                                                 },
                                                 "first_name": {
                                                     "type": "string"
                                                 },
                                                 "last_name": {
+                                                    "type": "string"
+                                                },
+                                                "email": {
+                                                    "type": "string"
+                                                },
+                                                "phone": {
                                                     "type": "string"
                                                 }
                                             }
@@ -253,15 +207,19 @@
                 }
             },
             "patch": {
-                "description": "Update current user",
+                "description": "Edit contact",
                 "parameters": [
                     {
                         "name": "Authorization",
                         "in": "header"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path"
                     }
                 ],
                 "requestBody": {
-                    "description": "Update current user",
+                    "description": "Update contact",
                     "content": {
                         "application/json": {
                             "schema": {
@@ -273,7 +231,10 @@
                                     "last_name": {
                                         "type": "string"
                                     },
-                                    "password": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "phone": {
                                         "type": "string"
                                     }
                                 }
@@ -283,7 +244,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Success update current user",
+                        "description": "Success update contact",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -295,13 +256,16 @@
                                                 "id": {
                                                     "type": "number"
                                                 },
-                                                "username": {
-                                                    "type": "string"
-                                                },
                                                 "first_name": {
                                                     "type": "string"
                                                 },
                                                 "last_name": {
+                                                    "type": "string"
+                                                },
+                                                "email": {
+                                                    "type": "string"
+                                                },
+                                                "phone": {
                                                     "type": "string"
                                                 }
                                             }
@@ -315,20 +279,22 @@
                         }
                     }
                 }
-            }
-        },
-        "/api/users/logout": {
+            },
             "delete": {
-                "description": "Logout user",
+                "description": "Remove Contact",
                 "parameters": [
                     {
                         "name": "Authorization",
                         "in": "header"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Success logout user",
+                        "description": "Success delete contact",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -348,5 +314,6 @@
                 }
             }
         }
+
     }
 }
